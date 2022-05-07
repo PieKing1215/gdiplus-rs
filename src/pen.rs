@@ -1,9 +1,8 @@
 use std::mem::MaybeUninit;
 
-use gdiplus_sys2::{
-    GdipClonePen, GdipCreatePen1, GdipDeletePen, GdipGetPenColor, GdipGetPenWidth, GdipSetPenColor,
-    GdipSetPenWidth, GpPen, REAL,
-};
+use winapi::um::gdiplusflat::{GdipCreatePen1, GdipClonePen, GdipGetPenColor, GdipSetPenColor, GdipGetPenWidth, GdipSetPenWidth, GdipDeletePen};
+use winapi::um::gdiplusgpstubs::GpPen;
+use winapi::um::gdiplustypes::REAL;
 
 use crate::color::Color;
 use crate::types::Result;

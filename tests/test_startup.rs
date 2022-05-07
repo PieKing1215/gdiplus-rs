@@ -2,8 +2,8 @@
 
 use gdiplus::enums::Status;
 use gdiplus::{Error, GdiPlus};
-use gdiplus_sys2::GdiplusStartupInput;
 use winapi::shared::minwindef::FALSE;
+use winapi::um::gdiplusinit::GdiplusStartupInput;
 
 #[test]
 fn test_startup_success() {

@@ -1,15 +1,15 @@
-use gdiplus_sys2::REAL;
+use winapi::um::gdiplustypes::REAL;
 
 use crate::enums::Status;
 
 #[derive(Debug)]
 pub enum Error {
-    Code(i32),
+    Code(u32),
     String(String),
     Status(Status),
 }
-impl From<i32> for Error {
-    fn from(val: i32) -> Error {
+impl From<u32> for Error {
+    fn from(val: u32) -> Error {
         match Status::try_from(val) {
             Ok(status) => Error::Status(status),
             Err(err) => err,

@@ -12,15 +12,19 @@ categories = ["os::windows-apis"]
 include = ["/src/**/*", "/Cargo.toml", "/LICENSE", "/README.md"]
 
 [dependencies]
-gdiplus-sys2 = "0.1"
-winapi = { version = "0.3", features = [
+# gdiplus-sys2 = "0.1"
+winapi = { git = "https://github.com/Jarcho/winapi-rs", branch = "gdiplus", features = [
     "windef",
+    "gdiplusflat",
+    "gdiplusinit",
 ]}
 
 [dev-dependencies]
-winapi = { version = "0.3", features = [
+winapi = { git = "https://github.com/Jarcho/winapi-rs", branch = "gdiplus", features = [
     "impl-default",
     "libloaderapi",
     "winerror",
     "winuser",
+    "gdiplusflat",
+    "gdiplusinit",
 ]}

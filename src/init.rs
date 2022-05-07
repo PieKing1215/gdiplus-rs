@@ -1,8 +1,8 @@
 use std::mem::MaybeUninit;
 
-use gdiplus_sys2::{GdiplusShutdown, GdiplusStartup, GdiplusStartupInput, GdiplusStartupOutput};
 use winapi::shared::minwindef::FALSE;
 use winapi::shared::ntdef::NULL;
+use winapi::um::gdiplusinit::{GdiplusStartupInput, GdiplusStartupOutput, GdiplusStartup, GdiplusShutdown};
 
 use crate::return_iferror;
 use crate::types::Result;

@@ -1,6 +1,7 @@
 use std::mem::MaybeUninit;
 
-use gdiplus_sys2::{GdipCloneBrush, GdipDeleteBrush, GdipGetPenBrushFill, GpBrush};
+use winapi::um::gdiplusflat::{GdipCloneBrush, GdipDeleteBrush, GdipGetPenBrushFill};
+use winapi::um::gdiplusgpstubs::GpBrush;
 
 use crate::color::Color;
 use crate::pen::Pen;

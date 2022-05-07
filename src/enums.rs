@@ -2,7 +2,7 @@ use std::mem;
 
 use crate::types::{Error, Result};
 
-#[repr(i32)]
+#[repr(u32)]
 #[derive(Debug)]
 pub enum Status {
     Ok,
@@ -28,10 +28,10 @@ pub enum Status {
     PropertyNotSupported,
     ProfileNotFound,
 }
-impl TryFrom<i32> for Status {
+impl TryFrom<u32> for Status {
     type Error = Error;
 
-    fn try_from(val: i32) -> Result<Self> {
+    fn try_from(val: u32) -> Result<Self> {
         if val >= 0 && val <= 21 {
             Ok(unsafe { mem::transmute(val) })
         } else {

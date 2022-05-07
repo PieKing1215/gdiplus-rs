@@ -1,5 +1,4 @@
-use gdiplus_sys2::{Color_AlphaShift, Color_BlueShift, Color_GreenShift, Color_RedShift};
-use winapi::shared::windef::COLORREF;
+use winapi::{shared::windef::COLORREF, um::gdipluscolor::{AlphaShift, RedShift, GreenShift, BlueShift}};
 
 const RGB_MASK: u32 = 0x00ffffff;
 const ALPHA_MASK: u32 = 0xff000000;
@@ -15,19 +14,19 @@ pub struct Color {
 }
 impl Color {
     pub fn alpha(&self) -> u8 {
-        ((self.color & ALPHA_MASK) >> Color_AlphaShift) as _
+        ((self.color & ALPHA_MASK) >> AlphaShift) as _
     }
 
     pub fn red(&self) -> u8 {
-        ((self.color & RED_MASK) >> Color_RedShift) as _
+        ((self.color & RED_MASK) >> RedShift) as _
     }
 
     pub fn green(&self) -> u8 {
-        ((self.color & GREEN_MASK) >> Color_GreenShift) as _
+        ((self.color & GREEN_MASK) >> GreenShift) as _
     }
 
     pub fn blue(&self) -> u8 {
-        ((self.color & BLUE_MASK) >> Color_BlueShift) as _
+        ((self.color & BLUE_MASK) >> BlueShift) as _
     }
 
     pub fn argb(&self) -> u32 {
@@ -50,9 +49,9 @@ impl From<u32> for Color {
 impl From<AlphaColorTuple> for Color {
     fn from(val: AlphaColorTuple) -> Self {
         Self {
-            color: (val.0 as u32) << Color_AlphaShift
-                | (val.1 as u32) << Color_RedShift
-                | (val.2 as u32) << Color_GreenShift
+            color: (val.0 as u32) << AlphaShift
+                | (val.1 as u32) << RedShift
+                | (val.2 as u32) << GreenShift
                 | val.3 as u32,
         }
     }
@@ -61,8 +60,8 @@ impl From<ColorTuple> for Color {
     fn from(val: ColorTuple) -> Self {
         Self {
             color: ALPHA_MASK
-                | (val.0 as u32) << Color_RedShift
-                | (val.1 as u32) << Color_GreenShift
+                | (val.0 as u32) << RedShift
+                | (val.1 as u32) << GreenShift
                 | val.2 as u32,
         }
     }

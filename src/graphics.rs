@@ -1,9 +1,9 @@
 use std::mem::MaybeUninit;
 
-use gdiplus_sys2::{
-    GdipCreateFromHDC, GdipDeleteGraphics, GdipDrawLine, GdipFillRectangle, GdipSetSmoothingMode,
-    GpGraphics, HDC, REAL,
-};
+use winapi::shared::windef::HDC;
+use winapi::um::gdiplusflat::{GdipCreateFromHDC, GdipSetSmoothingMode, GdipDeleteGraphics, GdipDrawLine, GdipFillRectangle};
+use winapi::um::gdiplusgpstubs::GpGraphics;
+use winapi::um::gdiplustypes::REAL;
 
 use crate::brush::SolidBrush;
 use crate::enums::SmoothingMode;
@@ -29,7 +29,7 @@ impl Graphics {
     }
 
     pub fn set_smoothing_mode(&mut self, smoothing_mode: SmoothingMode) -> Result<&mut Self> {
-        return_iferror!(GdipSetSmoothingMode(self.graphics, smoothing_mode as i32));
+        return_iferror!(GdipSetSmoothingMode(self.graphics, smoothing_mode as u32));
         Ok(self)
     }
 
