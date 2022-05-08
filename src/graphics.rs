@@ -1,8 +1,8 @@
 use std::mem::MaybeUninit;
 
 use winapi::shared::windef::HDC;
-use winapi::um::gdiplusflat::{GdipCreateFromHDC, GdipSetSmoothingMode, GdipDeleteGraphics, GdipDrawLine, GdipFillRectangle};
-use winapi::um::gdiplusgpstubs::GpGraphics;
+use winapi::um::gdiplusflat::{GdipCreateFromHDC, GdipSetSmoothingMode, GdipDeleteGraphics, GdipDrawLine, GdipFillRectangle, GdipFillRectangles};
+use winapi::um::gdiplusgpstubs::{GpGraphics, GpRectF};
 use winapi::um::gdiplustypes::REAL;
 
 use crate::brush::SolidBrush;
@@ -141,6 +141,20 @@ impl<'a> WithBrush<'a> {
             position.1,
             width,
             height,
+        ));
+
+        Ok(self)
+    }
+
+    pub fn fill_rectangles(
+        &mut self,
+        rects: Vec<GpRectF>,
+    ) -> Result<&mut Self> {
+        return_iferror!(GdipFillRectangles(
+            self.graphics.graphics(),
+            self.brush.brush(),
+            rects.as_ptr(),
+            rects.len() as i32,
         ));
 
         Ok(self)
